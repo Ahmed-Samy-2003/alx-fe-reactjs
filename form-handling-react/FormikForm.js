@@ -1,27 +1,32 @@
-// formikForm.js  
-
+// src/formikForm.js  
 import React from 'react';  
 import { Formik, Form, Field, ErrorMessage } from 'formik';  
 import * as Yup from 'yup';  
 
 const RegistrationForm = () => {  
-  // Validation schema using Yup  
-  const validationSchema = Yup.object().shape({  
+  const validationSchema = Yup.object({  
     username: Yup.string()  
       .min(3, 'Username must be at least 3 characters')  
       .max(15, 'Username must not exceed 15 characters')  
-      .required('Username is required'),  
+      .required('Required'),  
     email: Yup.string()  
       .email('Invalid email format')  
-      .required('Email is required'),  
+      .required('Required'),  
     password: Yup.string()  
       .min(6, 'Password must be at least 6 characters')  
-      .required('Password is required'),  
+      .required('Required'),  
   });  
 
-  const handleSubmit = (values, { setSubmitting }) => {  
-    console.log('Form data', values);  
-    // You can handle the form submission here (e.g., call an API).  
+  const handleSubmit = async (values, { setSubmitting }) => {  
+    console.log('Submitted values:', values);  
+    // Mock API call simulation  
+    // await fetch('https://api.example.com/register', {  
+    //   method: 'POST',  
+    //   headers: {  
+    //     'Content-Type': 'application/json',  
+    //   },  
+    //   body: JSON.stringify(values),  
+    // });  
     setSubmitting(false);  
   };  
 
@@ -34,23 +39,20 @@ const RegistrationForm = () => {
       {({ isSubmitting }) => (  
         <Form>  
           <div>  
-            <label htmlFor="username">Username</label>  
+            <label htmlFor="username">Username:</label>  
             <Field type="text" name="username" />  
             <ErrorMessage name="username" component="div" className="error" />  
           </div>  
-
           <div>  
-            <label htmlFor="email">Email</label>  
+            <label htmlFor="email">Email:</label>  
             <Field type="email" name="email" />  
             <ErrorMessage name="email" component="div" className="error" />  
           </div>  
-
           <div>  
-            <label htmlFor="password">Password</label>  
+            <label htmlFor="password">Password:</label>  
             <Field type="password" name="password" />  
             <ErrorMessage name="password" component="div" className="error" />  
           </div>  
-
           <button type="submit" disabled={isSubmitting}>  
             Register  
           </button>  
@@ -61,15 +63,3 @@ const RegistrationForm = () => {
 };  
 
 export default RegistrationForm;  
-import React from 'react';  
-import RegistrationForm from './formikForm';  
-
-const App = () => {  
-  return (  
-    <div>  
-      <h1>Registration Form</h1>  
-      <RegistrationForm />  
-    </div>  
-  );  
-};  
-export default App;  

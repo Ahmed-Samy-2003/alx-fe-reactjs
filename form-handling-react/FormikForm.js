@@ -61,3 +61,15 @@ const RegistrationForm = () => {
 };  
 
 export default RegistrationForm;  
+import React from 'react';  
+import RegistrationForm from './formikForm';  
+
+const App = () => {  
+  return (  
+    <div>  
+      <h1>Registration Form</h1>  
+      <RegistrationForm />  
+    </div>  
+  );  
+};  
+export default App;  

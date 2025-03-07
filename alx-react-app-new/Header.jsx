@@ -3,9 +3,10 @@ import React from 'react';
 const Header = () => {  
     return (  
         <header>  
-            <h1>Welcome to My Website</h1>  
+            <h1>My Application Header</h1>  
         </header>  
     );  
 };  
 
 export default Header;  
+import Header from './components/Header';  

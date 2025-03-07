@@ -1,16 +1,14 @@
-// RecipeDetails component
-  import { useRecipeStore } from './recipeStore';
+// مثال عام لملف recipeStore.js  
+import { useState } from 'react';  
 
-  const RecipeDetails = ({ recipeId }) => {
-    const recipe = useRecipeStore(state =>
-      state.recipes.find(recipe => recipe.id === recipeId)
-    );
+const useRecipeStore = () => {  
+    const [recipes, setRecipes] = useState([]);  
 
-    return (
-      <div>
-        <h1>{recipe.title}</h1>
-        <p>{recipe.description}</p>
-        {/* Render EditRecipeForm and DeleteRecipeButton here */}
-      </div>
-    );
-  };
+    const addRecipe = (recipe) => {  
+        setRecipes([...recipes, recipe]);  
+    };  
+
+    return { recipes, addRecipe };  
+};  
+
+export default useRecipeStore;  

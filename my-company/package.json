@@ -1,7 +1,6 @@
-pwd  
-npm init  
-npm init -y  
-npm install <package-name>  
-git log  
-git checkout HEAD -- package.json  
-npx create-react-app my-app  
+{  
+  "dependencies": {  
+    "react-dom": "^x.x.x",  
+    "vite": "^x.x.x"  
+  }  
+}  

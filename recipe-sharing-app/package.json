@@ -6,3 +6,29 @@
 "dependencies": {  
     "zustand": "^4.0.0" // Use the latest version available  
 }  
+{  
+  "name": "recipe-sharing-app",  
+  "version": "1.0.0",  
+  "private": true,  
+  "scripts": {  
+    "dev": "vite",  
+    "build": "vite build",  
+    "serve": "vite preview"  
+  },  
+  "dependencies": {  
+    "react": "^18.0.0",  
+    "react-dom": "^18.0.0",  
+    "zustand": "^4.0.0"  
+  },  
+  "devDependencies": {  
+    "vite": "^4.0.0"  
+  }  
+}  
+"dependencies": {  
+  "react": "...",  
+  "react-dom": "...",  
+  "zustand": "...",  
+},  
+"devDependencies": {  
+  "vite": "..."  
+}  

@@ -1,60 +1,71 @@
-// src/components/RegistrationForm.js  
+// src/RegistrationForm.js  
 import React, { useState } from 'react';  
 
 const RegistrationForm = () => {  
-    const [username, setUsername] = useState('');  
-    const [email, setEmail] = useState('');  
-    const [password, setPassword] = useState('');  
-    const [error, setError] = useState('');  
+  const [formData, setFormData] = useState({  
+    username: '',  
+    email: '',  
+    password: '',  
+  });  
 
-    const handleSubmit = (e) => {  
-        e.preventDefault();  
-        if (!username || !email || !password) {  
-            setError('All fields are required');  
-            return;  
-        }  
-        setError('');  
-        // Simulate API call  
-        console.log('User Registered:', { username, email, password });  
-        // Reset fields after submission  
-        setUsername('');  
-        setEmail('');  
-        setPassword('');  
-    };  
+  const handleChange = (event) => {  
+    const { name, value } = event.target;  
+    setFormData({  
+      ...formData,  
+      [name]: value,  
+    });  
+  };  
 
-    return (  
-        <form onSubmit={handleSubmit}>  
-            <div>  
-                <label htmlFor="username">Username:</label>  
-                <input  
-                    type="text"  
-                    id="username"  
-                    value={username}  
-                    onChange={(e) => setUsername(e.target.value)}  
-                />  
-            </div>  
-            <div>  
-                <label htmlFor="email">Email:</label>  
-                <input  
-                    type="email"  
-                    id="email"  
-                    value={email}  
-                    onChange={(e) => setEmail(e.target.value)}  
-                />  
-            </div>  
-            <div>  
-                <label htmlFor="password">Password:</label>  
-                <input  
-                    type="password"  
-                    id="password"  
-                    value={password}  
-                    onChange={(e) => setPassword(e.target.value)}  
-                />  
-            </div>  
-            {error && <div style={{ color: 'red' }}>{error}</div>}  
-            <button type="submit">Register</button>  
-        </form>  
-    );  
+  const handleSubmit = async (event) => {  
+    event.preventDefault();  
+    console.log('Form submitted:', formData);  
+    
+    // Here you might call your mock API for registration  
+    // For example, using fetch:  
+    // await fetch('https://api.example.com/register', {  
+    //   method: 'POST',  
+    //   headers: {  
+    //     'Content-Type': 'application/json',  
+    //   },  
+    //   body: JSON.stringify(formData),  
+    // });  
+  };  
+
+  return (  
+    <form onSubmit={handleSubmit}>  
+      <div>  
+        <label htmlFor="username">Username:</label>  
+        <input  
+          type="text"  
+          id="username"  
+          name="username"  
+          value={formData.username}  
+          onChange={handleChange}  
+        />  
+      </div>  
+      <div>  
+        <label htmlFor="email">Email:</label>  
+        <input  
+          type="email"  
+          id="email"  
+          name="email"  
+          value={formData.email}  
+          onChange={handleChange}  
+        />  
+      </div>  
+      <div>  
+        <label htmlFor="password">Password:</label>  
+        <input  
+          type="password"  
+          id="password"  
+          name="password"  
+          value={formData.password}  
+          onChange={handleChange}  
+        />  
+      </div>  
+      <button type="submit">Register</button>  
+    </form>  
+  );  
 };  
 
 export default RegistrationForm;  

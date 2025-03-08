@@ -1,6 +1,0 @@
-cd src  
-mkdir components  
-cd components  
-touch WelcomeMessage.jsx  
-echo > WelcomeMessage.jsx  
-npm run dev  

@@ -37,3 +37,38 @@ function App() {
 }  
 
 export default App;  
+import React from 'react';  
+import { Link } from 'react-router-dom';  
+
+const Navbar = () => {  
+  return (  
+    <nav style={{  
+      backgroundColor: '#333', // لون الخلفية  
+      display: 'flex',         // استخدام flexbox  
+      justifyContent: 'space-between', // توزيع العناصر  
+      padding: '10px'         // حشوة إضافية  
+    }}>  
+      <div style={{ color: 'white', fontSize: '20px' }}>  
+        My Website  
+      </div>  
+      <ul style={{  
+        listStyleType: 'none',  // إزالة نقاط القائمة  
+        display: 'flex',         // استخدام flexbox للعنصر ul  
+        margin: 0,              // إزالة الهامش  
+        padding: 0               // إزالة الحشوة  
+      }}>  
+        <li style={{ margin: '0 15px' }}>  
+          <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Home</Link>  
+        </li>  
+        <li style={{ margin: '0 15px' }}>  
+          <Link to="/about" style={{ color: 'white', textDecoration: 'none' }}>About</Link>  
+        </li>  
+        <li style={{ margin: '0 15px' }}>  
+          <Link to="/contact" style={{ color: 'white', textDecoration: 'none' }}>Contact</Link>  
+        </li>  
+      </ul>  
+    </nav>  
+  );  
+};  
+
+export default Navbar;  

@@ -1,61 +1,30 @@
-// src/UserContext.js  
-
+// UserContext.js  
 import React, { createContext } from 'react';  
 
-// إنشاء UserContext باستخدام createContext  
+// إنشاء Context جديد  
 const UserContext = createContext();  
 
-// تصدير UserContext  
-export default UserContext; 
-// src/UserContext.js  
-
-import React, { createContext, useState } from 'react';  
-
-// إنشاء UserContext باستخدام createContext  
-const UserContext = createContext();  
-
-// مزود Context  
-const UserProvider = ({ children }) => {  
-  const [userData, setUserData] = useState({  
-    name: "Jane Doe",  
-    email: "jane.doe@example.com"  
-  });  
-
-  return (  
-    <UserContext.Provider value={{ userData, setUserData }}>  
-      {children}  
-    </UserContext.Provider>  
-  );  
-};  
-
-// تصدير UserContext ومزود UserProvider  
-export { UserContext, UserProvider };  
-// مثال على الاستخدام في App.jsx  
-import React from 'react';  
-import ProfilePage from './ProfilePage';  
-import { UserProvider } from './UserContext';  
-
-function App() {  
-  return (  
-    <UserProvider>  
-      <ProfilePage />  
-    </UserProvider>  
-  );  
-}  
-
-export default App;  
+// تصدير الـ Context للاستخدام في مكونات أخرى  
+export default UserContext;  
+// بعض مكون React  
 import React, { useContext } from 'react';  
 import UserContext from './UserContext';  
 
-const UserDetails = () => {  
-  const { userData } = useContext(UserContext);  
+const UserProfile = () => {  
+    // استخدام الـ Context للحصول على بيانات المستخدم  
+    const userContext = useContext(UserContext);  
+    const { user } = userContext; // على افتراض أن لدينا مستخدمًا  
 
-  return (  
-    <div>  
-      <p>Name: {userData.name}</p>  
-      <p>Email: {userData.email}</p>  
-    </div>  
-  );  
+    return (  
+        <div>  
+            <h1>User Profile</h1>  
+            {user ? (  
+                <p>Welcome, {user.name}!</p>  
+            ) : (  
+                <p>Please log in.</p>  
+            )}  
+        </div>  
+    );  
 };  
 
-export default UserDetails;  
+export default UserProfile;  

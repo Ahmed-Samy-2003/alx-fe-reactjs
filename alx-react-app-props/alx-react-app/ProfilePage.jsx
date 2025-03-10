@@ -3,7 +3,7 @@ import React from 'react';
 import UserInfo from './UserInfo';  
 
 function ProfilePage() {  
-  return <UserInfo />; // لا حاجة لتمرير userData  
+    return <UserInfo />; // إزالة تم تمرير userData  
 }  
 
 export default ProfilePage;  

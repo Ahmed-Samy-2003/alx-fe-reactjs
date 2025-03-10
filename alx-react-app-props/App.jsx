@@ -1,17 +1,19 @@
 // App.jsx  
 import React from 'react';  
-import ProfilePage from './ProfilePage'; // استيراد مكون ProfilePage  
-import UserContext from './UserContext'; // استيراد UserContext  
+import UserContext from './UserContext';  
+import ProfilePage from './ProfilePage';  
 
-function App() {  
-  const userData = { name: "Jane Doe", email: "jane.doe@example.com" }; // بيانات المستخدم  
+const App = () => {  
+    const userData = {  
+        name: 'John Doe',  // بيانات مستخدم افتراضية  
+        email: 'john.doe@example.com',  
+    };  
 
-  return (  
-    // إحاطة مكون ProfilePage بمكون UserContext.Provider وتمرير userData كقيمة  
-    <UserContext.Provider value={userData}>  
-      <ProfilePage />  
-    </UserContext.Provider>  
-  );  
-}  
+    return (  
+        <UserContext.Provider value={userData}> {/* تقديم userData للسياق */}  
+            <ProfilePage />  
+        </UserContext.Provider>  
+    );  
+};  
 
 export default App;  

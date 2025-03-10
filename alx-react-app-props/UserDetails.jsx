@@ -1,17 +1,23 @@
 // UserDetails.jsx  
 import React, { useContext } from 'react';  
-import UserContext from './UserContext'; // استيراد UserContext  
+import UserContext from './UserContext';  
 
-function UserDetails() {  
-  const userData = useContext(UserContext); // الحصول على بيانات المستخدم من السياق  
+const UserDetails = () => {  
+    const user = useContext(UserContext); // استهلاك UserContext  
 
-  return (  
-    <div>  
-      <p>Name: {userData.name}</p> {/* عرض اسم المستخدم */}  
-      <p>Email: {userData.email}</p> {/* عرض بريد المستخدم */}  
-    </div>  
-  );  
-}  
+    return (  
+        <div>  
+            <h2>تفاصيل المستخدم</h2>  
+            {user ? (  
+                <div>  
+                    <p>الاسم: {user.name}</p>  
+                    <p>البريد الإلكتروني: {user.email}</p>  
+                </div>  
+            ) : (  
+                <p>لا توجد بيانات مستخدم متاحة.</p>  
+            )}  
+        </div>  
+    );  
+};  
 
 export default UserDetails;  
-

@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 const AddRecipeForm = () => {  
   const [title, setTitle] = useState('');  
   const [ingredients, setIngredients] = useState('');  
-  const [preparation, setPreparation] = useState('');  
+  const [steps, setSteps] = useState('');  // Changed from preparation to steps  
   const [error, setError] = useState('');  
 
   const handleSubmit = (e) => {  
     e.preventDefault();  
-    
+
     // Simple validation  
-    if (!title || !ingredients || !preparation) {  
+    if (!title || !ingredients || !steps) {  // Updated validation to check steps  
       setError('All fields are required.');  
       return;  
     }  
@@ -29,7 +29,7 @@ const AddRecipeForm = () => {
     const newRecipe = {  
       title,  
       ingredients: ingredientsArray,  
-      preparation,  
+      steps,  // Updated to use steps variable  
     };  
 
     console.log('New Recipe:', newRecipe);  
@@ -38,7 +38,7 @@ const AddRecipeForm = () => {
     // Reset form fields  
     setTitle('');  
     setIngredients('');  
-    setPreparation('');  
+    setSteps('');  // Reset steps  
   };  
 
   return (  
@@ -69,11 +69,11 @@ const AddRecipeForm = () => {
           />  
         </div>  
         <div className="mb-4">  
-          <label htmlFor="preparation" className="block text-sm font-medium text-gray-700">Preparation Steps</label>  
+          <label htmlFor="steps" className="block text-sm font-medium text-gray-700">Preparation Steps</label>  
           <textarea  
-            id="preparation"  
-            value={preparation}  
-            onChange={(e) => setPreparation(e.target.value)}  
+            id="steps"  // Ensure the id matches with the state variable  
+            value={steps}  // Use the steps variable for input  
+            onChange={(e) => setSteps(e.target.value)}  // Update the state using steps  
             className="mt-1 block w-full p-2 border rounded-md shadow-sm focus:ring focus:ring-blue-200"  
             rows="5"  
             required  

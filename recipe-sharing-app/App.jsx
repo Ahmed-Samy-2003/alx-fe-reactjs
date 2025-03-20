@@ -14,3 +14,27 @@ function App() {
 }  
 
 export default App;  
+import React, { useEffect } from 'react';  
+import FavoritesList from './FavoritesList';  
+import RecommendationsList from './RecommendationsList';  
+import useRecipeStore from './recipeStore';  
+
+const App = () => {  
+    const { generateRecommendations } = useRecipeStore(state => ({  
+        generateRecommendations: state.generateRecommendations  
+    }));  
+
+    useEffect(() => {  
+        generateRecommendations(); // Generate recommendations whenever the app loads  
+    }, [generateRecommendations]);  
+
+    return (  
+        <div>  
+            <h1>Recipe Sharing Application</h1>  
+            <FavoritesList />  
+            <RecommendationsList />  
+        </div>  
+    );  
+};  
+
+export default App;  

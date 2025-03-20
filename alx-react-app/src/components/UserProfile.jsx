@@ -12,3 +12,15 @@ const UserProfile = (props) => {
 
 export default UserProfile;  
 import './UserProfile.css';  
+function App() {  
+    return (  
+        <div>  
+            <UserProfile  
+                name="Alice"  
+                age="25"  
+                bio="Loves hiking and photography"  
+            />  
+            {/* You can add more components or content here if needed */}  
+        </div>  
+    );  
+}  

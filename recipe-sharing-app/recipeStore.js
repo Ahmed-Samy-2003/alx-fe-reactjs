@@ -1,29 +1,22 @@
-// src/recipeStore.js  
 import create from 'zustand';  
 
 const useRecipeStore = create(set => ({  
-  recipes: [],  
-  addRecipe: (newRecipe) => set(state => ({ recipes: [...state.recipes, newRecipe] })),  
-  setRecipes: (recipes) => set({ recipes })  
-}));  
-
-export default useRecipeStore;  
-import create from 'zustand';  
-
-const useRecipeStore = create(set => ({  
-    recipes: [], // All available recipes  
-    favorites: [], // Array to hold favorite recipe IDs  
+    recipes: [], // مصفوفة للوصفات (ستتم ملؤها لاحقًا)  
+    favorites: [], // مصفوفة للمفضلات  
+    // إضافة وصفة إلى المفضلة  
     addFavorite: (recipeId) => set(state => ({  
-        favorites: [...state.favorites, recipeId] // Add recipe ID to favorites  
+        favorites: [...state.favorites, recipeId]  
     })),  
+    // إزالة وصفة من المفضلة  
     removeFavorite: (recipeId) => set(state => ({  
-        favorites: state.favorites.filter(id => id !== recipeId) // Remove recipe ID from favorites  
+        favorites: state.favorites.filter(id => id !== recipeId)  
     })),  
-    recommendations: [], // Array for recommended recipes  
+    recommendations: [], // مصفوفة للتوصيات  
+    // توليد التوصيات  
     generateRecommendations: () => set(state => {  
-        // Generate mock recommendations based on favorite recipes  
+        // تنفيذ وهمي لاستناد التوصيات على المفضلات  
         const recommended = state.recipes.filter(recipe =>  
-            state.favorites.includes(recipe.id) && Math.random() > 0.5 // Mock logic for recommendations  
+            state.favorites.includes(recipe.id) && Math.random() > 0.5  
         );  
         return { recommendations: recommended };  
     }),  

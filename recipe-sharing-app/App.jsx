@@ -1,19 +1,3 @@
-// src/App.jsx  
-import React from 'react';  
-import RecipeList from './components/RecipeList';  
-import AddRecipeForm from './components/AddRecipeForm';  
-
-function App() {  
-  return (  
-    <div>  
-      <h1>Recipe Sharing Application</h1>  
-      <AddRecipeForm />  
-      <RecipeList />  
-    </div>  
-  );  
-}  
-
-export default App;  
 import React, { useEffect } from 'react';  
 import FavoritesList from './FavoritesList';  
 import RecommendationsList from './RecommendationsList';  
@@ -25,12 +9,12 @@ const App = () => {
     }));  
 
     useEffect(() => {  
-        generateRecommendations(); // Generate recommendations whenever the app loads  
+        generateRecommendations(); // توليد التوصيات عند تحميل التطبيق  
     }, [generateRecommendations]);  
 
     return (  
         <div>  
-            <h1>Recipe Sharing Application</h1>  
+            <h1>تطبيق مشاركة الوصفات</h1>  
             <FavoritesList />  
             <RecommendationsList />  
         </div>  

@@ -11,3 +11,4 @@ function App() {
 }  
 
 export default App;  
+import UserProfile from './components/UserProfile';  

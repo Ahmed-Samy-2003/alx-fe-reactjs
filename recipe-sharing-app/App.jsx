@@ -1,22 +1,16 @@
-import React, { useEffect } from 'react';  
-import FavoritesList from './FavoritesList';  
-import RecommendationsList from './RecommendationsList';  
+import React from 'react';  
+import SearchBar from './SearchBar';  
+import RecipeList from './RecipeList';  
 import useRecipeStore from './recipeStore';  
 
 const App = () => {  
-    const { generateRecommendations } = useRecipeStore(state => ({  
-        generateRecommendations: state.generateRecommendations  
-    }));  
-
-    useEffect(() => {  
-        generateRecommendations(); // توليد التوصيات عند تحميل التطبيق  
-    }, [generateRecommendations]);  
+    const { recipes } = useRecipeStore(state => state);  
 
     return (  
         <div>  
             <h1>تطبيق مشاركة الوصفات</h1>  
-            <FavoritesList />  
-            <RecommendationsList />  
+            <SearchBar />  
+            <RecipeList />  
         </div>  
     );  
 };  

@@ -8,3 +8,11 @@ function WelcomeMessage() {
 }  
 
 export default WelcomeMessage;  
+function App() {  
+    return (  
+        <div>  
+            <WelcomeMessage />  
+            {/* Other components */}  
+        </div>  
+    );  
+}  

@@ -1,15 +1,14 @@
 import { useRecipeStore } from './recipeStore';  
 
 const FavoritesList = () => {  
-    // Get favorite recipes based on favorite IDs  
     const { recipes, favorites } = useRecipeStore(state => ({  
         recipes: state.recipes,  
-        favorites: state.favorites.map(id => state.recipes.find(recipe => recipe.id === id))  
+        favorites: state.favorites.map(id => state.recipes.find(recipe => recipe.id === id)).filter(Boolean) // التأكد من وجود الوصفة  
     }));  
 
     return (  
         <div>  
-            <h2>My Favorites</h2>  
+            <h2>مفضلاتي</h2>  
             {favorites.length > 0 ? (  
                 favorites.map(recipe => (  
                     <div key={recipe.id}>  
@@ -18,7 +17,7 @@ const FavoritesList = () => {
                     </div>  
                 ))  
             ) : (  
-                <p>No favorites added.</p>  
+                <p>لا توجد مفضلات مضافة.</p>  
             )}  
         </div>  
     );  

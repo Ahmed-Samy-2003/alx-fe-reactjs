@@ -30,3 +30,7 @@ function App() {
 }  
 
 export default App;  
+import React from 'react';  
+import Header from './components/Header'; // Adjust the file path if necessary  
+import MainContent from './components/MainContent'; // Adjust the file path if necessary  
+import Footer from './components/Footer'; // Adjust the file path if necessary  

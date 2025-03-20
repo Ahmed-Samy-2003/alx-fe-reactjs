@@ -12,3 +12,5 @@ function App() {
 
 export default App;  
 import UserProfile from './components/UserProfile';  
+import React from 'react';  
+import UserProfile from './components/UserProfile'; // Ensure this path is correct  

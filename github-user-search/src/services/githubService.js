@@ -33,3 +33,16 @@ export const fetchUserData = async (username) => {
   const response = await axios.get(`https://api.github.com/users/${username}`);  
   return response.data; // Return the user data  
 };  
+// src/services/githubService.js  
+import axios from 'axios';  
+
+// Function to fetch user data based on advanced search criteria  
+export const fetchUserData = async (query) => {  
+  const response = await axios.get(`https://api.github.com/search/users`, {  
+    params: {  
+      q: query, // Incorporating the query string for advanced search  
+      per_page: 30 // Specify the number of results per page, adjust as needed  
+    }  
+  });  
+  return response.data; // Return the raw data from the response  
+};  

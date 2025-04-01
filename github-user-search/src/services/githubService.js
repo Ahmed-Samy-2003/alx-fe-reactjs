@@ -46,3 +46,42 @@ export const fetchUserData = async (query) => {
   });  
   return response.data; // Return the raw data from the response  
 };  
+// src/services/githubService.js  
+import axios from 'axios';  
+
+// Function to fetch user data based on advanced search criteria  
+export const fetchUserData = async (username, location, minRepos) => {  
+  // Construct the query string  
+  const queryParts = [];  
+
+  // Check if username is provided and add to query  
+  if (username) {  
+    queryParts.push(username);  
+  }  
+
+  // Check if location is provided and add it to the query  
+  if (location) {  
+    queryParts.push(`location:${location}`);  
+  }  
+
+  // Check if minRepos is provided, ensure it's a valid number, and add it to the query  
+  if (minRepos && !isNaN(minRepos)) {  
+    queryParts.push(`repos:>=${minRepos}`);  
+  }  
+
+  const query = queryParts.join(' '); // Combine all parts into one query string  
+
+  try {  
+    // Make the API call to GitHub's search/users endpoint with constructed query  
+    const response = await axios.get('https://api.github.com/search/users', {  
+      params: {  
+        q: query, // pass the constructed query  
+        per_page: 30, // specify the number of items to fetch per page  
+      }  
+    });  
+    return response.data; // Return the API response data  
+  } catch (error) {  
+    // Handle and throw an error if there's an issue with the request  
+    throw new Error('Unable to fetch user data: ' + error.message);  
+  }  
+};  

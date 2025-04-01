@@ -3,3 +3,10 @@ added <number> packages from <number> contributors and audited <number> packages
 "dependencies": {  
     "axios": "^<version>"  
 }  
+{  
+  "devDependencies": {  
+    "tailwindcss": "^latest_version",  
+    "postcss": "^latest_version",  
+    "autoprefixer": "^latest_version"  
+  }  
+}  

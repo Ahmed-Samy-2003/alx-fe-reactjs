@@ -1,27 +1,28 @@
 // src/components/Search.jsx  
 import React, { useState } from 'react';  
-import { fetchUserData } from '../services/githubService'; // Ensure this import matches your structure  
+import { fetchUserData } from '../services/githubService'; // Import the function to fetch user data  
 
 function Search() {  
-  const [username, setUsername] = useState(''); // State to hold the username input  
-  const [user, setUser] = useState(null); // State to store user data  
-  const [loading, setLoading] = useState(false); // State to indicate loading  
-  const [error, setError] = useState(''); // State to store error messages  
+  const [username, setUsername] = useState(''); // State to hold the entered username  
+  const [user, setUser] = useState(null); // State to hold fetched user data  
+  const [loading, setLoading] = useState(false); // State for loading status  
+  const [error, setError] = useState(''); // State to hold error messages  
 
+  // Function to handle form submission  
   const handleSubmit = async (e) => {  
     e.preventDefault(); // Prevent default form submission behavior  
-    setLoading(true); // Indicate loading has started  
-    setError(''); // Reset any previous error message  
+    setLoading(true); // Set loading state to true  
+    setError(''); // Reset error message before each new search  
 
     try {  
-      const userData = await fetchUserData(username); // Fetch user data from API  
-      setUser(userData); // Store the user data in the state  
+      const userData = await fetchUserData(username); // Fetch user data based on username  
+      setUser(userData); // Store the fetched user data in state  
     } catch (err) {  
-      // If there's an error, set the error state accordingly  
-      setError("Looks like we can't find the user"); // Set the error message  
-      setUser(null); // Clear previous user data  
+      // If an error occurs (e.g., user not found), set the error message  
+      setError("Looks like we can't find the user"); // IMPORTANT: This is the message you want to display  
+      setUser(null); // Reset user state to null in case of error  
     } finally {  
-      setLoading(false); // Reset loading state  
+      setLoading(false); // Set loading state back to false  
     }  
   };  
 
@@ -31,19 +32,19 @@ function Search() {
         <input  
           type="text"  
           value={username}  
-          onChange={(e) => setUsername(e.target.value)} // Update username as the user types  
+          onChange={(e) => setUsername(e.target.value)} // Update username state as user types  
           placeholder="Enter GitHub username"  
           required  
         />  
         <button type="submit">Search</button>  
       </form>  
 
-      {loading && <p>Loading...</p>} {/* Show loading indicator while fetching data */}  
-      {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message if applicable */}  
-      {user && (  
+      {loading && <p>Loading...</p>} {/* Condition to show loading state */}  
+      {error && <p style={{ color: 'red' }}>{error}</p>} {/* Condition to show error message */}  
+      {user && ( // Show user details if data is successfully fetched  
         <div>  
           <h2>{user.name}</h2>  
-          <img src={user.avatar_url} alt={user.login} width="100" />  
+          <img src={user.avatar_url} alt={`${user.login}'s avatar`} width="100" />  
           <p>  
             GitHub Profile: <a href={user.html_url} target="_blank" rel="noopener noreferrer">{user.html_url}</a>  
           </p>  
@@ -53,4 +54,4 @@ function Search() {
   );  
 }  
 
-export default Search;  
+export default Search; // Export the Search component  

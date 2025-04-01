@@ -98,3 +98,19 @@ function Search() {
 }  
 
 export default Search; // Export the Search component  
+// Function in Search.jsx where handleSubmit is defined  
+const handleSubmit = async (e) => {  
+  e.preventDefault(); // Prevent default form submission  
+  setLoading(true);  
+  setError('');  
+
+  try {  
+    const userData = await fetchUserData(username, location, minRepos); // Fetch user data using the GitHub service  
+    setUsers(userData.items); // Assuming userData.items contains the relevant users  
+  } catch (error) {  
+    setError("Couldn't find any users.");  
+    setUsers([]);  
+  } finally {  
+    setLoading(false); // Reset loading state  
+  }  
+};  

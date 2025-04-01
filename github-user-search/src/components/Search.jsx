@@ -55,3 +55,74 @@ function Search() {
 }  
 
 export default Search; // Export the Search component  
+// src/components/Search.jsx  
+import React, { useState } from 'react';  
+import { fetchUserData } from '../services/githubService'; // Import your API service  
+
+function Search() {  
+  const [username, setUsername] = useState(''); // State for username  
+  const [location, setLocation] = useState(''); // State for location  
+  const [minRepos, setMinRepos] = useState(''); // State for minimum repos  
+  const [users, setUsers] = useState([]); // State for user data  
+  const [loading, setLoading] = useState(false); // Loading state  
+  const [error, setError] = useState(''); // Error state  
+
+  // Function to handle form submission  
+  const handleSubmit = async (e) => {  
+    e.preventDefault(); // Prevent default form submission behavior  
+    setLoading(true); // Set loading state  
+    setError(''); // Reset any previous errors  
+
+    const query = `${username} location:${location} repos:>=${minRepos}`; // Construct the query  
+
+    try {  
+      const userData = await fetchUserData(query); // Fetch user data based on advanced search criteria  
+      setUsers(userData.items); // Assume the response structure has an items array  
+    } catch (err) {  
+      setError("Looks like we can't find any users.");  
+      setUsers([]);  
+    } finally {  
+      setLoading(false); // Reset loading state  
+    }  
+  };  
+
+  return (  
+    <div className="p-4 max-w-lg mx-auto">  
+      <form onSubmit={handleSubmit} className="flex flex-col space-y-4">  
+        <input  
+          type="text"  
+          value={username}  
+          onChange={(e) => setUsername(e.target.value)}  
+          placeholder="Enter GitHub username"  
+          className="border rounded p-2"  
+          required  
+        />  
+        <input  
+          type="text"  
+          value={location}  
+          onChange={(e) => setLocation(e.target.value)}  
+          placeholder="Location (e.g., San Francisco)"  
+          className="border rounded p-2"  
+        />  
+        <input  
+          type="number"  
+          value={minRepos}  
+          onChange={(e) => setMinRepos(e.target.value)}  
+          placeholder="Minimum Repositories"  
+          className="border rounded p-2"  
+        />  
+        <button type="submit" className="bg-blue-500 text-white rounded p-2">  
+          Search  
+        </button>  
+      </form>  
+
+      {loading && <p>Loading...</p>}  
+      {error && <p className="text-red-600">{error}</p>}  
+      {users.length > 0 && (  
+        <div className="mt-4">  
+          {users.map((user) => (  
+            <div key={user.id} className="border p-4 mb-4 rounded">  
+              <h2 className="text-xl">{user.login}</h2>  
+              <p>Location: {user.location || 'N/A'}</p>  
+              <p>Repositories: {user.public_repos}</p>  
+              <a href={user.html_url} target="_blank" rel="noopener noreferrer" className

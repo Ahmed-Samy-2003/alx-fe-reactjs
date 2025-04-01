@@ -114,3 +114,38 @@ const handleSubmit = async (e) => {
     setLoading(false); // Reset loading state  
   }  
 };  
+import React, { useState } from 'react';  
+import { fetchUserData } from '../services/githubService';  
+
+function Search() {  
+  const [username, setUsername] = useState('');  
+  const [location, setLocation] = useState('');  
+  const [minRepos, setMinRepos] = useState('');  
+  const [users, setUsers] = useState([]);  
+  const [loading, setLoading] = useState(false);  
+  const [error, setError] = useState('');  
+
+  const handleSubmit = async (e) => {  
+    e.preventDefault();  
+    setLoading(true);  
+    setError('');  
+
+    try {  
+      const userData = await fetchUserData(username, location, minRepos);  
+      setUsers(userData.items); // Use userData.items to access searched users  
+    } catch (err) {  
+      setError("Couldn't find any users.");  
+      setUsers([]);  
+    } finally {  
+      setLoading(false);  
+    }  
+  };  
+
+  // Rest of the component code...  
+
+  return (  
+    <div>  
+      {/* Render form and results */}  
+    </div>  
+  );  
+}  

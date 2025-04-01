@@ -1,4 +1,5 @@
-
++ axios@<version>  
+added <number> packages from <number> contributors and audited <number> packages in <time>  
 "dependencies": {  
     "axios": "^<version>"  
 }  
